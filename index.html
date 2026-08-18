@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bobbi Beattie — Computer Science &amp; Business, Trinity College Dublin</title>
+<meta name="description" content="Bobbi Beattie — Computer Science and Business student at Trinity College Dublin. Experience across Dublin, Singapore, Boston and Toronto.">
+<link rel="canonical" href="https://bobbibeattie.com">
+
+<meta property="og:title" content="Bobbi Beattie">
+<meta property="og:description" content="Computer Science &amp; Business student at Trinity College Dublin.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bobbibeattie.com">
+<meta property="og:image" content="https://bobbibeattie.com/headshot.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#faf9f6" id="meta-theme">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<script>
+(function(){
+  var t=null; try{ t=localStorage.getItem('theme'); }catch(e){}
+  if(!t) t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+
+<style>
+/* ============================================================
+   TOKENS — carried over from Bobbi's draft
+   ============================================================ */
+:root{
+  --font-display:'Space Grotesk', sans-serif;
+  --font-sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',monospace;
+
+  --radius-sm:6px;
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:20px;
+  --transition:0.25s cubic-bezier(0.4,0,0.2,1);
+  --container:1200px;
+
+  /* light (default) */
+  --bg:#faf9f6;
+  --surface:#ffffff;
+  --surface-2:#f5f5f4;
+  --text:#171717;
+  --text-2:#525252;
+  --text-3:#78716c;
+  --border:#e7e5e4;
+  --border-2:#d6d3d1;
+
+  --accent:#10b981;
+  --accent-soft:#ecfdf5;
+  --accent-border:#a7f3d0;
+  --accent-text:#065f46;
+
+  --solid-bg:#171717;
+  --solid-fg:#faf9f6;
+
+  --grid-line:rgba(128,128,128,0.045);
+  --glow:rgba(214,211,209,0.30);
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.04);
+  --shadow:0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.08);
+  --nav-bg:rgba(250,249,246,0.82);
+}
+[data-theme="dark"]{
+  --bg:#0e0e0d;
+  --surface:#171715;
+  --surface-2:#1e1e1b;
+  --text:#f5f5f4;
+  --text-2:#a8a29e;
+  --text-3:#8a8580;
+  --border:#2a2825;
+  --border-2:#3a3733;
+
+  --accent:#34d399;
+  --accent-soft:rgba(52,211,153,0.10);
+  --accent-border:rgba(52,211,153,0.28);
+  --accent-text:#6ee7b7;
+
+  --solid-bg:#f5f5f4;
+  --solid-fg:#17170f;
+
+  --grid-line:rgba(255,255,255,0.035);
+  --glow:rgba(52,211,153,0.10);
+  --shadow-sm:none;
+  --shadow:0 2px 10px rgba(0,0,0,0.4);
+  --shadow-lg:0 12px 36px rgba(0,0,0,0.5);
+  --nav-bg:rgba(14,14,13,0.82);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background-color .3s ease,color .3s ease;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.container{max-width:var(--container);margin:0 auto;padding:0 1.5rem;}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.site-nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1.5rem;}
+.nav-brand{
+  font-family:var(--font-display);font-weight:700;font-size:1rem;
+  letter-spacing:-0.5px;color:var(--text);
+}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.desktop-nav{display:flex;gap:1.75rem;}
+.nav-link{
+  font-size:0.85rem;font-weight:500;color:var(--text-3);
+  transition:var(--transition);position:relative;padding:4px 0;
+}
+.nav-link:hover,.nav-link.active{color:var(--text);}
+.nav-link.active::after{
+  content:'';position:absolute;left:0;right:0;bottom:-2px;
+  height:2px;background:var(--accent);border-radius:2px;
+}
+.theme-btn{
+  width:36px;height:36px;flex-shrink:0;display:grid;place-items:center;
+  border-radius:var(--radius);border:1px solid var(--border-2);
+  background:var(--surface);color:var(--text-2);cursor:pointer;
+  transition:var(--transition);
+}
+.theme-btn:hover{color:var(--text);border-color:var(--accent);}
+.theme-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;}
+.icon-sun{display:none;}
+[data-theme="dark"] .icon-sun{display:block;}
+[data-theme="dark"] .icon-moon{display:none;}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 24px;font-size:0.85rem;font-weight:500;font-family:var(--font-sans);
+  border-radius:var(--radius);border:1px solid transparent;cursor:pointer;
+  transition:var(--transition);
+}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;}
+.btn-dark{background:var(--solid-bg);color:var(--solid-fg);box-shadow:var(--shadow);}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.btn-outline{background:var(--surface);color:var(--text);border-color:var(--border-2);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent-text);transform:translateY(-2px);}
+[data-theme="dark"] .btn-outline:hover{color:var(--accent);}
+
+/* ============================================================
+   SECTION FURNITURE
+   ============================================================ */
+.section{padding:6rem 0;}
+.section-label{
+  display:block;font-family:var(--font-mono);font-size:0.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.15em;color:var(--text-3);margin-bottom:0.75rem;
+}
+.section-heading{
+  font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);
+  font-weight:700;letter-spacing:-1px;color:var(--text);line-height:1.15;margin:0;
+}
+.section-head{margin-bottom:3rem;}
+.section-sub{color:var(--text-2);font-weight:300;margin:0.75rem 0 0;max-width:60ch;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.55;transform:scale(1.18);}}
+
+.reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+  .pulse-dot{animation:none;}
+  .fade-1,.fade-2,.fade-3,.fade-4,.fade-5,.fade-6{animation:none;opacity:1;}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;padding:5rem 0 4.5rem;overflow:hidden;}
+.hero-bg-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:40px 40px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%);
+}
+.hero-glow{
+  position:absolute;top:14%;left:26%;width:520px;height:520px;
+  background:var(--glow);border-radius:50%;filter:blur(100px);pointer-events:none;
+}
+.hero-grid{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  gap:3.5rem;align-items:center;
+}
+.fade-1{opacity:0;animation:fadeUp .5s ease forwards .10s;}
+.fade-2{opacity:0;animation:fadeUp .5s ease forwards .20s;}
+.fade-3{opacity:0;animation:fadeUp .5s ease forwards .30s;}
+.fade-4{opacity:0;animation:fadeUp .5s ease forwards .40s;}
+.fade-5{opacity:0;animation:fadeUp .5s ease forwards .50s;}
+.fade-6{opacity:0;animation:fadeUp .5s ease forwards .60s;}
+
+.availability-badge{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+  background:var(--accent-soft);border:1px solid var(--accent-border);
+  border-radius:999px;font-family:var(--font-mono);font-size:0.7rem;font-weight:600;
+  color:var(--accent-text);width:fit-content;
+}
+.pulse-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;
+  animation:pulse 2s ease infinite;flex-shrink:0;}
+
+.hero-heading{
+  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,3.75rem);
+  font-weight:700;letter-spacing:-2px;line-height:1.1;color:var(--text);
+  margin:1.25rem 0 1rem;
+}
+.hero-heading-muted{color:var(--text-3);}
+.hero-location{
+  display:flex;align-items:center;gap:8px;font-family:var(--font-mono);
+  font-size:0.78rem;color:var(--text-3);margin:0 0 1rem;
+}
+.hero-location svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.hero-tagline{
+  font-size:1.1rem;font-weight:300;color:var(--text-2);
+  max-width:520px;line-height:1.7;margin:0 0 1.75rem;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.5rem;}
+
+/* ---------- globe (replaces the portrait) ---------- */
+.globe-col{display:flex;flex-direction:column;align-items:center;}
+.globe-stage{position:relative;display:flex;align-items:center;justify-content:center;width:100%;}
+.globe-stage::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:min(74vmin,540px);height:min(74vmin,540px);transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow) 0%,transparent 62%);pointer-events:none;
+}
+#globe-holder{position:relative;width:min(60vmin,440px);height:min(60vmin,440px);touch-action:pan-y;}
+#globe-holder canvas{display:block;width:100%;height:100%;cursor:grab;}
+#globe-holder canvas.dragging{cursor:grabbing;}
+
+.pin{
+  position:absolute;transform:translate(-50%,-50%);z-index:5;
+  background:none;border:0;padding:0;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .25s ease;
+  display:flex;align-items:center;gap:7px;
+}
+.pin.vis{opacity:1;pointer-events:auto;}
+.pin-dot{
+  position:relative;width:9px;height:9px;border-radius:50%;flex-shrink:0;background:#fff;
+  box-shadow:0 0 0 2.5px rgba(255,255,255,.4),0 0 10px 2px rgba(0,0,0,.32);
+  transition:transform .2s ease;
+}
+.pin-label{
+  font-family:var(--font-mono);font-size:0.68rem;font-weight:500;white-space:nowrap;
+  color:var(--text);background:var(--nav-bg);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  padding:2.5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  transition:var(--transition);
+}
+.pin:hover .pin-dot,.pin.active .pin-dot{transform:scale(1.4);}
+.pin:hover .pin-label,.pin.active .pin-label{border-color:var(--accent);color:var(--accent-text);}
+[data-theme="dark"] .pin:hover .pin-label,[data-theme="dark"] .pin.active .pin-label{color:var(--accent);}
+
+.city-row{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1.5rem;}
+.city-btn{
+  font-family:var(--font-sans);font-size:0.8rem;font-weight:500;padding:7px 16px;
+  border-radius:999px;border:1px solid var(--border-2);background:var(--surface);
+  color:var(--text-2);cursor:pointer;transition:var(--transition);
+}
+.city-btn:hover{color:var(--text);border-color:var(--accent);transform:translateY(-1px);}
+.city-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+[data-theme="dark"] .city-btn.active{color:#0e2b20;}
+
+.globe-info{
+  margin-top:1.25rem;width:100%;max-width:420px;min-height:132px;
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--surface);box-shadow:var(--shadow-sm);padding:1.1rem 1.25rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .3s ease,transform .3s ease;
+}
+.globe-info.show{opacity:1;transform:none;}
+.gi-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+.gi-city{font-family:var(--font-mono);font-size:0.66rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.13em;color:var(--accent-text);}
+[data-theme="dark"] .gi-city{color:var(--accent);}
+.gi-when{font-family:var(--font-mono);font-size:0.66rem;color:var(--text-3);}
+.gi-title{font-family:var(--font-display);font-size:1rem;font-weight:700;
+  letter-spacing:-0.4px;color:var(--text);margin:6px 0 5px;}
+.gi-body{margin:0;font-size:0.86rem;font-weight:300;color:var(--text-2);line-height:1.6;}
+.globe-fallback{display:none;text-align:center;color:var(--text-3);font-size:0.85rem;padding:2rem 1rem;}
+.no-webgl #globe-holder{display:none;}
+.no-webgl .globe-fallback{display:block;}
+
+/* ============================================================
+   ABOUT (portrait moved here)
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:3.5rem;align-items:start;}
+.portrait-wrapper{position:relative;}
+.portrait-back{position:absolute;inset:0;border-radius:var(--radius-xl);}
+.portrait-back-1{transform:rotate(-4deg);background:var(--accent-soft);border:1px solid var(--accent-border);}
+.portrait-back-2{transform:rotate(3deg);background:var(--surface-2);border:1px solid var(--border);}
+.portrait-main{
+  position:relative;border-radius:var(--radius-xl);overflow:hidden;
+  border:1px solid var(--border);box-shadow:var(--shadow-lg);background:var(--surface-2);
+}
+.portrait-main img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;}
+.about-body p{color:var(--text-2);font-weight:300;margin:0 0 1.15em;}
+.about-body p:last-child{margin-bottom:0;}
+.about-body strong{color:var(--text);font-weight:600;}
+
+/* ============================================================
+   TIMELINE / EXPERIENCE
+   ============================================================ */
+.timeline{display:flex;flex-direction:column;}
+.entry{
+  display:grid;grid-template-columns:150px 1fr;gap:2rem;
+  padding:1.75rem 0;border-bottom:1px solid var(--border);
+}
+.entry:last-child{border-bottom:none;}
+.entry-date{font-family:var(--font-mono);font-size:0.74rem;color:var(--text-3);
+  padding-top:5px;line-height:1.65;}
+.entry h3{font-family:var(--font-display);margin:0 0 3px;font-size:1.08rem;
+  font-weight:700;letter-spacing:-0.4px;color:var(--text);}
+.entry .org{color:var(--accent-text);font-size:0.85rem;margin:0 0 0.7rem;font-weight:500;}
+[data-theme="dark"] .entry .org{color:var(--accent);}
+.entry ul{margin:0;padding-left:1.1rem;color:var(--text-2);font-size:0.92rem;font-weight:300;}
+.entry ul li{margin-bottom:5px;}
+.entry ul li::marker{color:var(--text-3);}
+.entry ul li strong{color:var(--text);font-weight:600;}
+
+.more-links{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;
+  margin-top:2rem;padding-top:1.75rem;border-top:1px solid var(--border);}
+.more-links .ml-label{font-size:0.85rem;color:var(--text-3);margin-right:0.25rem;}
+
+/* ============================================================
+   CARDS (projects)
+   ============================================================ */
+.cards{display:grid;gap:1rem;}
+.card{
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:1.6rem 1.75rem;background:var(--surface);box-shadow:var(--shadow-sm);
+  transition:var(--transition);
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--border-2);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.6rem;}
+.card h3{font-family:var(--font-display);margin:0;font-size:1.08rem;font-weight:700;
+  letter-spacing:-0.4px;color:var(--text);}
+.card-year{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-3);
+  white-space:nowrap;padding-top:4px;}
+.card p{margin:0 0 1rem;color:var(--text-2);font-size:0.92rem;font-weight:300;}
+.card p:last-child{margin-bottom:0;}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.tag{
+  font-family:var(--font-mono);font-size:0.68rem;padding:4px 10px;border-radius:var(--radius-sm);
+  background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);
+}
+[data-theme="dark"] .tag{color:var(--accent);}
+.card-soon{border-style:dashed;border-color:var(--border-2);background:transparent;box-shadow:none;}
+.card-soon:hover{transform:none;box-shadow:none;}
+.card-soon h3{color:var(--text-2);}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:1.75rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);
+}
+.skill-group h4{
+  font-family:var(--font-mono);font-size:0.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.15em;color:var(--text-3);margin:0 0 0.75rem;
+}
+.skill-group p{margin:0;font-size:0.92rem;color:var(--text-2);font-weight:300;line-height:1.9;}
+
+/* ============================================================
+   AWARDS
+   ============================================================ */
+.award-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;}
+.award-card{
+  border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--surface);box-shadow:var(--shadow-sm);transition:var(--transition);
+  display:flex;flex-direction:column;
+}
+.award-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.award-img{width:100%;height:170px;object-fit:cover;background:var(--surface-2);
+  border-bottom:1px solid var(--border);}
+.award-body{padding:1.35rem 1.5rem;flex:1;}
+.award-year{font-family:var(--font-mono);font-size:0.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.13em;color:var(--accent-text);display:block;margin-bottom:0.5rem;}
+[data-theme="dark"] .award-year{color:var(--accent);}
+.award-card h3{font-family:var(--font-display);margin:0 0 0.5rem;font-size:1.02rem;
+  font-weight:700;letter-spacing:-0.4px;color:var(--text);}
+.award-card p{margin:0;font-size:0.88rem;color:var(--text-2);font-weight:300;line-height:1.6;}
+.award-card p strong{color:var(--text);font-weight:600;}
+
+/* ============================================================
+   CONTACT + FOOTER
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:2rem;}
+.contact-item{
+  display:flex;align-items:center;gap:0.9rem;padding:1.1rem 1.25rem;
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--surface);box-shadow:var(--shadow-sm);transition:var(--transition);
+}
+.contact-item:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.contact-item svg{width:19px;height:19px;stroke:var(--accent);fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.ci-label{font-family:var(--font-mono);font-size:0.64rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.13em;color:var(--text-3);display:block;margin-bottom:2px;}
+.ci-value{color:var(--text);font-size:0.9rem;display:block;word-break:break-word;}
+
+.site-footer{
+  border-top:1px solid var(--border);padding:2.25rem 0 3rem;
+  font-size:0.8rem;color:var(--text-3);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:3rem;}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .portrait-wrapper{max-width:280px;}
+}
+@media (max-width:700px){
+  .desktop-nav{display:none;}
+  .section{padding:4rem 0;}
+  .hero{padding:3rem 0 3.5rem;}
+  #globe-holder{width:min(80vw,360px);height:min(80vw,360px);}
+  .pin-label{display:none;}
+  .entry{grid-template-columns:1fr;gap:0.5rem;}
+  .entry-date{padding-top:0;}
+  .globe-info{min-height:150px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="site-nav">
+  <div class="container nav-inner">
+    <a href="#home" class="nav-brand">Bobbi Beattie</a>
+    <div class="nav-right">
+      <nav class="desktop-nav" id="desktop-nav">
+        <a href="#home" class="nav-link active" data-section="home">Home</a>
+        <a href="#about" class="nav-link" data-section="about">About</a>
+        <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+        <a href="#awards" class="nav-link" data-section="awards">Awards</a>
+        <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+      </nav>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch between light and dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="section hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-text">
+        <div class="availability-badge fade-1">
+          <span class="pulse-dot"></span>
+          <span>Open to Internships &amp; Graduate Roles</span>
+        </div>
+
+        <h1 class="hero-heading fade-2">Bobbi Beattie</h1>
+
+        <p class="hero-location fade-3">
+          <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Trinity College Dublin &bull; Dublin, Ireland</span>
+        </p>
+
+        <p class="hero-tagline fade-4">
+          Third-year Computer Science &amp; Business student at Trinity College Dublin.
+          Interested in software engineering, product, and finance.
+        </p>
+
+        <div class="hero-actions fade-5">
+          <a href="#experience" class="btn btn-dark">
+            <span>View My Work</span>
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/bobbi-beattie" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-11h4v1.5"/><circle cx="4" cy="4" r="2"/><path d="M2 9h4v12H2z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ========== GLOBE ========== -->
+      <div class="globe-col fade-3">
+        <div class="globe-stage">
+          <div id="globe-holder"></div>
+          <div class="globe-fallback">
+            Your browser doesn't support WebGL — use the buttons below to read about each city.
+          </div>
+        </div>
+        <div class="city-row" id="city-row"></div>
+        <div class="globe-info" id="globe-info">
+          <div class="gi-top">
+            <span class="gi-city" id="gi-city">Dublin, Ireland</span>
+            <span class="gi-when" id="gi-when">2024 — 2028</span>
+          </div>
+          <h3 class="gi-title" id="gi-title">Trinity College Dublin</h3>
+          <p class="gi-body" id="gi-body">Studying Computer Science &amp; Business.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">01</span>
+      <h2 class="section-heading">About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="portrait-wrapper">
+        <div class="portrait-back portrait-back-1"></div>
+        <div class="portrait-back portrait-back-2"></div>
+        <div class="portrait-main">
+          <img src="headshot.jpg" alt="Bobbi Beattie" loading="lazy">
+        </div>
+      </div>
+      <div class="about-body">
+        <p>
+          I'm a <strong>Computer Science &amp; Business</strong> student at Trinity College Dublin.
+          Before Trinity I spent two years at <strong>UWC South East Asia in Singapore</strong> on
+          a full scholarship, and a summer at <strong>MIT</strong> doing research as Ireland's
+          representative at RSI. I am looking for <strong>summer 2027 internships</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" class="section reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">02</span>
+      <h2 class="section-heading">Experience</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="entry">
+        <div class="entry-date">Summer 2026</div>
+        <div>
+          <h3>Intern, FX &amp; Payment Operations</h3>
+          <p class="org">Corpay · Toronto</p>
+          <ul>
+            <li>Processed and monitored FX spot transactions totalling over <strong>USD 200 million</strong>.</li>
+            <li>Supported payment operations and reconciliation for institutional clients.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">Jun 2024 —<br>Aug 2024</div>
+        <div>
+          <h3>Summer Accelerator</h3>
+          <p class="org">Patch · Dublin</p>
+          <ul>
+            <li>Selected for a competitive six-week startup accelerator sponsored by <strong>Stripe, OpenAI, Dogpatch Labs and NDRC</strong>.</li>
+            <li>Built a prototype impact-detecting sensor for hurling, using gyroscope and accelerometer data to measure collision severity.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2024 — 2028</div>
+        <div>
+          <h3>B.A. Computer Science &amp; Business</h3>
+          <p class="org">Trinity College Dublin</p>
+          <ul>
+            <li><strong>Trinity Entrance Exhibition Award</strong></li>
+            <li>Coursework: Data Structures &amp; Algorithms, Programming, Applied Probability, Software Engineering, Finance, Accounting, Marketing, Quantitative Business Methods.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2021 — 2023</div>
+        <div>
+          <h3>IB Diploma</h3>
+          <p class="org">UWC South East Asia · Singapore</p>
+          <ul>
+            <li>Attended on a <strong>full €100,000 scholarship</strong> awarded through competitive national selection.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-links">
+      <span class="ml-label">Full history:</span>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/bobbi-beattie" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-11h4v1.5"/><circle cx="4" cy="4" r="2"/><path d="M2 9h4v12H2z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+
+    <div class="skills">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <p>Python · Java<br>SQL</p>
+      </div>
+      <div class="skill-group">
+        <h4>Technical</h4>
+        <p>Data structures &amp; algorithms<br>Software engineering<br>Applied probability · Excel</p>
+      </div>
+      <div class="skill-group">
+        <h4>Business</h4>
+        <p>Finance · Accounting<br>Marketing<br>Quantitative business methods</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AWARDS ================= -->
+<section id="awards" class="section reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">03</span>
+      <h2 class="section-heading">Awards</h2>
+    </div>
+    <div class="award-grid">
+
+      <article class="award-card">
+        <img class="award-img" src="rsi.jpg" alt="Research Science Institute at MIT" loading="lazy">
+        <div class="award-body">
+          <span class="award-year">2022</span>
+          <h3>Research Science Institute — MIT</h3>
+          <p><strong>Irish representative at RSI</strong>, a six-week international research
+          programme held at MIT for high school students in STEM, run by the Center for Excellence
+          in Education.</p>
+        </div>
+      </article>
+
+      <article class="award-card">
+        <img class="award-img" src="btyse.jpg" alt="BT Young Scientist and Technology Exhibition" loading="lazy">
+        <div class="award-body">
+          <span class="award-year">2020</span>
+          <h3>BT Young Scientist &amp; World Statistics Congress</h3>
+          <p><strong>1st place, Group Social Sciences</strong> and winner of the Irish Research
+          Award. Represented Ireland at the World Statistics Congress in Malaysia, and placed
+          <strong>1st of 15,000 global entries</strong> in the International Literary Poster
+          Competition.</p>
+        </div>
+      </article>
+
+      <article class="award-card">
+        <img class="award-img" src="patch.webp" alt="Patch summer accelerator" loading="lazy">
+        <div class="award-body">
+          <span class="award-year">2024</span>
+          <h3>Patch Summer Accelerator</h3>
+          <p>Selected for a competitive six-week startup accelerator sponsored by
+          <strong>Stripe, OpenAI, Dogpatch Labs and NDRC</strong>.</p>
+        </div>
+      </article>
+
+      <article class="award-card">
+        <img class="award-img" src="mag5.jpg" alt="UWC South East Asia" loading="lazy">
+        <div class="award-body">
+          <span class="award-year">2021</span>
+          <h3>UWCSEA Scholarship</h3>
+          <p>Full <strong>€100,000 scholarship</strong> to attend UWC South East Asia, Singapore,
+          awarded through a competitive national selection process.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">04</span>
+      <h2 class="section-heading">Get in touch</h2>
+      <p class="section-sub">
+        I'm open to internships, graduate opportunities, and conversations about anything at the
+        intersection of software and finance. Email is the fastest way to reach me.
+      </p>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:bobbijbeattie@gmail.com">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        <span>
+          <span class="ci-label">Email</span>
+          <span class="ci-value">bobbijbeattie@gmail.com</span>
+        </span>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/bobbi-beattie" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-11h4v1.5"/><circle cx="4" cy="4" r="2"/><path d="M2 9h4v12H2z"/></svg>
+        <span>
+          <span class="ci-label">LinkedIn</span>
+          <span class="ci-value">/in/bobbi-beattie</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer container">
+  <span>© 2026 Bobbi Beattie</span>
+  <span>Dublin, Ireland</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================
+   THEME
+   ============================================================ */
+var themeBtn=document.getElementById('theme-btn'),
+    metaTheme=document.getElementById('meta-theme');
+function currentTheme(){return document.documentElement.getAttribute('data-theme')||'light';}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  if(metaTheme) metaTheme.setAttribute('content', t==='dark'?'#0e0e0d':'#faf9f6');
+  try{ localStorage.setItem('theme',t); }catch(e){}
+  if(window.__globeTheme) window.__globeTheme(t);
+}
+themeBtn.addEventListener('click',function(){ applyTheme(currentTheme()==='dark'?'light':'dark'); });
+if(metaTheme) metaTheme.setAttribute('content', currentTheme()==='dark'?'#0e0e0d':'#faf9f6');
+
+/* ============================================================
+   CITY DATA — edit the text for each place here
+   ============================================================ */
+var CITIES=[
+  { key:'dublin', label:'Dublin', city:'Dublin, Ireland', when:'2024 — 2028',
+    lat:53.3498, lon:-6.2603,
+    title:'Trinity College Dublin',
+    body:'Studying Computer Science &amp; Business — software engineering, algorithms and applied probability on one side; finance, accounting and marketing on the other. Admitted with a Trinity Entrance Exhibition Award.' },
+
+  { key:'singapore', label:'Singapore', city:'Singapore', when:'2021 — 2023',
+    lat:1.3521, lon:103.8198,
+    title:'UWC South East Asia',
+    body:'Awarded a full €100,000 scholarship through competitive national selection to complete the International Baccalaureate, alongside classmates from more than ninety countries.' },
+
+  { key:'boston', label:'Boston', city:'Boston, USA', when:'Summer 2022',
+    lat:42.3601, lon:-71.0589,
+    title:'Research Science Institute at MIT',
+    body:'Selected as Ireland\'s representative at RSI, a six-week international research programme held at MIT for high school students in STEM.' },
+
+  { key:'toronto', label:'Toronto', city:'Toronto, Canada', when:'Summer 2026',
+    lat:43.6532, lon:-79.3832,
+    title:'Corpay — FX &amp; Payment Operations',
+    body:'Interned on the foreign exchange desk, processing and monitoring FX spot transactions totalling over USD 200 million, and supporting reconciliation for institutional clients.' }
+];
+var ARC_ORDER=['singapore','boston','dublin','toronto'];
+
+/* Country outlines: Natural Earth 110m, simplified, polyline-encoded at 0.01 deg */
+var COUNTRIES_ENC="llBgxa@VwBfB`@@hF{Cy@XyA,lcB~cb@`B?n@_eeAh@|BiAXqBwG?~heA,|D{rElLwVrBMfE}GtFzApBKfA_ChIp@lJaFrB~CbDxQg@dKcLbDwEvQkJ~EsKv@cFyG}Dv@mCcAoBlAe@wT,{kDdu@bJBInS~NENzDfKH?nW`Ah@sAGOeMuLkDwEuGeL}Eo@gOkBW,gqHv~V{GlPqAhJqDlByB[uA~F_D`@qCpFeIcB}BrIsJfIsGfLnDjKyE|H}@fKwy@A`Da[qC_LViHgCsRpAgCkCaEfE}MgCgGvC[oAsPpD{e@dBmGbBvGh@gJy@eUvBuEeByEsAjEcA_C]sKzCiJhAaQYyQ{BVc@qDbAuH|D@_D_CD_DiE{AkE~L{EOqCkFvBqM`FoG`BpDf@sJlE?}CkG~BmFtCz@dCaE{HaJ{EKj@cQbBkG`BKjBrChBkC`BXjCfK]bNdJtHfFbT`CLVfFbKlMdKxA`@gHpIuDg@wGlKyc@\\cPtJ[~EqC|DiH_AyCmEkB{HfBiBlC}A_IuGqIoHvCwCrFoEkFmNxCWuYbGmNNcJbL{@tCgIoBaHyHcI`T{R|BnAtI}ZhDmAdBkF~EO|JdZ@xf@fFdL`MfOa@iDeGaIeDcLSiH`BqDdC|DlJaCbBcG[iIaFgEpCMfAaCxMva@MvCiDFcD{I\\~OoB`CqG?kA`HlKzGxAhD@~SpGdK@zJ\\xAxBm@lFzT}@jC}HgEcJpAuHpMwGzT^jSiBxOoC`BlAbA?~kD,ieK|kO{AsC@qGrClFy@vD,_fMpqNiB|EgAIFiPbDiJD~T,acK~tNMqEhBlA{AbC,ssM`hQlAlBcArOoCiKdCwF,ikNt{QdAmFpB|Im@`D}CdBRwJ,}oM|ePyAtYoE|AwAfEuAdSqAiAjAe_@`AkDjAl@zAcJSkq@|CcG~AfLHve@,mgNjvT\\yGtBvL_AfHsAeM,okNntTf@cGd@~PmA{H,w_InzIlHnFcAcCh@eCdAdAbAsMpC|@a@kCdFwAnDrA]|E{DJlDfFGvB}AmCo@~DDzQ{@\\eA{Bu@tAwLuJuDiHF{At@d@,}uKfkOrGsV~@pDiCfLpE`NuBdARlGcBmDsI}A|BoK,ecMhkNoA}DbEmUvAYm@sJ~BoEnAaNhGkJ|AnJlDuWvD_HLyHjC|@fF~IuGnPX`GpBXdGsPdEaCnCbAwEpVjJiOoA|OuMfd@x@C^`QcAfDsCaC]sWeA`AcBcAaEcG}CbCcDfUs@_CkE`PtAtMeC`m@eAdD{AoE?zGkE|@cGeJs@cO~BpC|B}CaDwDqAyNlEwIbC\\y@kK,inMrmQt@}WnJnVGbFsGxBiCoH,wzMz~VuGmV[eQxCZdAxC|BlZk@nG,wpIl|XO_EbFz@~CmDuFvJwCVX}A,snNhrSbBe\\pDeF}Ala@{@aEo@pFkAL,enH|bW_AjLcErGe@lEyCz@~AiObJ_M,ipMrvVr@{WnCyK|DdVjCvFvA?~AlOaEvPiJmKyBbE_@cT,ayMz`TWcK`Ba@~AvBrB|c@DnHaAXwA_LK~c@{FmMhEqf@_E|GgAwDTmEdDqC,wgMvxSpA_FnI{D~DwTvATPfIjA_ChAbAuA`U~B|l@}AlB_@`M}CtFqAw]a@ha@iAfBoAoMq@pSeFqHwBwOd@kE|AbB{@}LbBuGeBaF`AuDbEcDqAcBmElC@wJ,meMvrRaCzE_BkFNsQx@s@~AxDtAmHrDb@lAfIwFzX_ACVwK,_kMfySb@cLbCnDkCvH[cA,o~MrfRzAwCzFrARhI_@tEsBCNfI{CLkAmX,wvN`wQkAuIm@vAIqMzDw[bEmKpE`SI`WqAtE}B_D@jJ}CzIwAkC,{~Nl{PuCae@`AoMkBwCu@mRSog@vBscA`Fhc@AsLpD|WbDtI~Axb@VsGb@hC`BeDfGhZtAuJvBtOy@xv@_BXm@qJoC`BfAoSeDrQcE{PsDlJ\\_UgAwHK|b@sG|W,odLbuMbA`JaBp@oBuA[wDv@{CpBT,iqLrxQjAyBdAzB_C`UsC{H`CgK,uvHfrK^kIvBqEwC|O,_eH`oK`BeATiI|AjDsA|FcAp@}@kA,gqHv~V?_lDmAcAnCaBhByO_@kSvG{TtHqMbJqAhHbEpAuAmFmVyBl@]yAA{JqGeKA_TyAiDmK{GjAaHpG?pDcD`FtRlGlChCmDlClV?aJb@pKnEl@xCpCoBzBzE}AjFnDoCk@qF|BtEC_@bC~@iCxMqBrC|BfGzOxKfMvGEvRyFlI~@@|CeCjBsKdFcCi@uGrEz@vGwC`Gn@|RfEc@{BxVz@dHhIhNfK?DlAiBhHyQbKkAnH|C|B{@dDoN`OrAd[uGbVd@`NkHtGsBbLsb@rVkNXeP}BsO|CZyHzDiBs@q@gIbB,o|Bfj]pBuBtBnD{CjAqBi@d@{A,w`C|m]d@tAgAx@`@oC,wfCtz]zA_AIrAqAS,{iC~b^bATc@`A_@wA,kxJlo_@P}CjAS{@tJa@cE,iiJt|\\jAyEhDrJq@fB}A\\eB_H,urLdpZvy@@|@gKxE}HoDkKrGgLrJgI|BsI~BE~AnBkC|GmDv@aD`G{DjBQ|NiGfS{ApXqDtRj@~EhCi@bDbVyH}@{@sEq@t@`KfT`BqClCzDpC~K|GfLbG~[VtJiNcf@mB_EmGgCbBrKaC`GnAbI_ESgA`Cd@bGmCpHoB?uAxCsBmAuEiFPiHmCkM}BtCmAsCxAjKUvLo@bHcEpIuDwU?cDbBZGeL_Mv^gBoBEaJ{GwNmEi`@bC_MYiL~EceA,smKhp`@~A_R~@fDcArK{Ab@,srH_aPvC|HhEHxAnBaAjKdJnCzBpNzIsDr@hCpBOeB~ECzTsA|Gh@pBtB\\g@jMfGfLlCvA}A`CE|FcDf@?`BiEOqCnFl@`QuD|DkF~NtB`O`VGHdBsErGjBzHiE?cAfFgHlERaEsCGAwI}H?g@pJ`C`L_@dBgBUcC~BBtCeCfD{KwEpBmEoCWyE}KEwHzEeTsAsEC{HdB_Gq@sI}Aq@iCbIkEyIgCnCeA{AcAkVmEiWh@eJnE_Aq@qEbA_GlBPgEuT|@hAzC_GxN}LgBkBrBsGs@}GrGoL[aGxBiB,eaGy|IaVFuBaOjF_OtD}Dm@aQpCoFhEN?aBbDg@D}F~Aw@aI{OR{@`CfD`CmOnC|FMjFsCMl@jGnF|CIfDvAr@n@sCrCi@hEnBi@dGyBCwDxMgFdJmEbB[zGgE`BiBjGvDrIdB_@@~E,fOgpZzFkU`IwGxBmIhBo@TvDdCk@vIsHGsBvAFzCqHx@TyAjP{KrJwAdGzB`HpCWdAzCi@~Hwg@D,zU_y\\fDcBt@|@cErAqE|Io@w@fFsI,nc@sp\\~A|HqBtG}@OLaHeBy@hBSMqBkCgDuBTCwBnCc@`EjE,j`@gf]nF{Fv@Zw@lCwG`Cf@o@,fOgpZvg@EcDpDTxNyEsEaKrCqJtYpBfC_Dl@aBvCyBuI?dH}FtIqBsJpA_IlKwAvBoEmIkKrDgU,pv@alWbBWtC`CRbE}DgBoAeE,`j@yeYaHy@xCm@fCfB,{Xw_VrDpB|DsCzAb@xDaFVlFzHx@hC~DvNpAeA\\xAbFyBlAkApFfAlF_BhAMfHkG\\aFbEoDZ}HmCvFkDqCsMv@}Di@aD_QyF`@qK,nPqgXx@{ExCgA}AhQmBm@GwF,tV}wWyBnDIiE`Aq@`AjA,qLq~WnEwClDJSdBzFB}JjCgFiB,oDi_WkBmMdE~Cd@vC?zTvCZpDqD}CaNzAN]vAbEdG~F{DlLmCx@hBeAlAcD_BlAbEw@p@kAYuBnCaEMz@dCfOYZ|By@tAyJY?rAiC|@mQsEgFsEtAwK,b_AynVkCfGg@yDxBoDx@`B,jt@kuVyAwHnBZ^vPgA?i@}Cz@}B,fs@cbVO{BtAq@~@|M{DgFt@gA,bg@aeTfAYR_KsAk@`BqJ~BiAzCaPjAbFcEhf@wDfQ}DiCfBgN,vEikSzFgBPqC|BaBlPx@B|EiIhLoZvSgIbC{UtSl@uLtRwRBkEfCgDbGkG`DnAhAyD,~gI|kLpFoDhD{ObBxAH|DkArL}L?,z{DbgJhYnDjD_GhCZtA{B`BH~F~DjBfHTlRpJe@dAvBDxMfE[z@gC_AmBfBy@xDvItHlAdBvItCx@zDcKpDdApBjFhF`CjDfGbIeEcApViGlA{@jEsENwEwEmSeCe@wAqBpBsAaAsHhCg@oAsF`@}JeBiAwByJ|@aCwCkJkBuPlCkEyBwJs@wHqG{MXaByEaGk@uDgDp@eGnCsBaDmAFcFpJoK~FeRvA]nHdEt@iQoJwHpBcB~CBrSxW,~gI|kL|L?DmIlClFoBzPyLxUtFeUcFgDy@gI,zlB|qLjJeF`E~@rNyDViDnEdA`BxEzMYvHpGvJr@jExBtPmCjJjB`CvCxJ}@hAvB|JdBrFa@f@nArHiCrA`ApBqBd@vAlSdCvEvErEOz@kEhGmAx@}SvBdMxD`@DrA_I~TmUbC_EuAyCqEy@nHqD_EkIcAdA}E}KgBs@dCxF|@[|ByW}EcLhAGsAk\\yIgUHsFuBaf@aD_Rv@yC{C,b[kvDrKw@jJ_Fd@pKjSfAlAyFvEOAvCgIbJ~@xBcEhMXbLuVtAeAfIj@dCdDnANtHuLbFj@`X}@Z_DyAaBaE|AcE}G}GgJoAgGuF{[sDeDyDfEiQgCwAmBqPDwIzDsE}@aGxE}EhFJZoA~HbGnTfDjI}@,nI}bGcDvBwU@aHeFqCqHGcGyZ{WgKAyBoLrPnBbWdKnNvK`OjThKtH,f\\_tFgE|GsBLmLvVsE@gJeFsMnE{FcG`@gBpDcAhDgKb@_HgDqFbAyEbFnDvUAbDwBpDhGdLrE,mr@qxCoC|EcFQ_OzFJdAiRwELmDmZF?eFoK??eiAdTyBxByDnEvHfTrBhQpKbKv@gIr@mAdBcH?M|Av@dCpDaA|FpE_BlGpDlEMzL{D~DZnClGhBz@`ClAgC,kyB_tCxWIMlDhRvEKeAlHsBpBdFxEnCbBtLdASrCzD|AxOsGz@uCjE}Ai@FcGuDlBgN~@C~BkErAeGuA}D_GoVaCwD~CuHp@mBiE|V{p@,ezBd_MlI?{@dP_AQAwKaDxA_@|Bw@k@h@gH,woBd_MoJWl@gInEeInAhAk@jKdDpCwA|@,myNciQk@oLdHqYrDp@VrLeCxZmCxCg@nGiCgO,onNwaSpByNnAx@lAfb@eGkJI{H,{zMubZrBcf@rC|Ch@j`@aCjKiCiBe@gG,}uMk}[t@uNlAdF_BrTaAo@\\sJ,qiMciZaBwL`CsH_@jV,uvNiwGUuh@hCpWo@xE}@qBEzL,qrIamCSdRwAm@_AsG`AiHhBD,}kMmmIoD}MyAt@iFsa@iCuj@nAiC|Lx_AbKbRdDg@bD}JG`WyAt@s@hJmBZi@kEmBFiDmKWvD,snIg|ZbK_AjPyGaAdH`HzBjEcEjCDwBvCxCbCc^QeEtBoGQ{AyD}AnA[wAdCu@,{fGkpXgC\\EeBkF]kDr@a@}K{S_KhCdX{DpAmCjF_AzI}QtIiAnDQlXbBbDl@mBnBArGbHvAA|BxGsC~T~EbV]tLeEzHb@`SsAzGuCd@}C`SnElEtBoAhC`EuEl^zHl]yBhBZ`GsGnLr@|GsBrGfBjByN|L{C~F}@iAfEtTmBQcA~Fp@pEoE~@i@dJlEhWbAjVdAzAfCoCjExIhCcI|Ap@p@rIeB~FBzHrArE{EdTDvHxE|KnCVqBlEzKvEdCgDCuCbC_CfBT^eBdJbNnP{JtBpF_GzJ{Dna@gJlSgEuHoAnBqAgHIxDyAGeAgHsIaAcEl\\}BbAI~CeBa@oB~Bl@fKaE`Bw@uGcH`KsCW{BzOcGpD_AuAyDz@eGsI}ApEyMqTgCfHaCoAuCrDkDgCaFhFwCyDcCpHmC[gDcUxBgIn@cP~Hm[dCM|CdP}Bn_@pCeIhHYnB}K_BYuAvBkA_CzBaNo@gDsCdCcEqMpAsJiCsBuBdDwBaB{BrC~@oPnBqBVzFnB?bA}Ci@sH_Cq@kG{a@HuCxBbEgCe`@vBcFcCcFsBpEaAgBz@mQbHi^iBeCsCnEQpF_BaA{EnBqKgSr@qOnBg@`DzDjE{DpGl@xB}E`L|M\\cF}HmOqBrBcC}AOzEoBn@gE_DcDbGeCeJmCl@hBkE~DlAd@uEoCzAoAoII}KpBqJeDpDuERy@mf@gB`DcCgFyD}d@XoTeBoXkDuFqAwM`AwIn@nG^cM`Bu@m@_WjDaRfBn@dF`[f@sU~BeBqAwKzCun@yCK`@gVhBaI~B{ArAtBlFuPqE_ExAaISqd@yDnCuAgG`Cmw@nGuTEud@rAeDpCVv@uF[cj@pD{I_AwF_C`DyAwAjC}q@vAf`eA|Iu^|BNn@eCoCl@\\}OxDgKjBlObEDh@lAeC|QwAl@ElLeAjBiAi@n@lF|AyArApB@}heAfAbOdIgKfCZk@tJlD~U`J|SiC|GzChOiAxAtA~D[jGdInHnAEj@cFbHXFxDdDtAvAsAdB|IbFdAn@hHjEz@xD~GiZnGuGaBsEqDm@uHgRe`@yG_DNpFdDvBzEzNuFbDbAbOlIrNxBcDhArVoCO_@vHbBtFVtf@|Ydk@XyHzBaBl@aEcB_CJ{EzEaH~[`Gp^l_@tBhG}AzFrEjH,_~L~cb@p@cNvAbNHcbeA_A`@sA`aeA,i~G_pEq@s@`DiJKkE|EpOi@lB{Ak@{@zE_CeE,mfDrlNh@gF^xEiAL,_hDdeNxA}ClC`@gFzB,q|CtgN`HaCaDlD_Ck@,`cIn}JuCqOxA_D`ChIeAxAxAhDyAbB,}pNs}AkAqJxEm[nAtNpCnBd@lDdD~AFpFyBlLgAuDaFpT{CxCgA_PbAiK,wqLkaE`BtNkCsAmA~F`AtHjF`He@xMiB|Ez@rFbC\\_@xJnBr@?~DbS`SdAgAlAdACdEzD`ChGKdB_ChF`AzF|FyBdCfFjKl@hGeBtGcTdCwNsa@wSmYqKsZkA_WeDqH_@qUrCqRr@`G|B{E,ksNijDjBfHVdQa@jQuC|OcAua@vBa[,qeNoyCnA|Lm@~Iq@gC_AvBi@}KxBoJ,mcOfcHwD{q@D_gA|Caf@lAnJZpx@pAak@{@eKfAeDrBzEwCgm@d@wQtAoB|E~o@HoMrGhK|EEbCoFdA`ShBqJhDm@PtEjDcGNzLnAeFfA~@\\pPfC{FxAAsAjKt@dBjDsO`DkAd@dJ_EnKfCcAfBfFRaXjIv`@dAdX~GbNrF`b@zBjDnGfB~CdIzCoAfJ~DJxGaDdHAnKiP`TuH`CwDrGsCgAeAdCiFeEiAkHoFyB`CdOaArFqF_Ap@qQcEjOUjJyD}EgLhOmA|FsAAsBvOFdl@}DbQiA_\\cCzg@mA[aEqm@gAmAgAzOoFcc@yApAsA_a@z@aYmBqOzCuc@kBzMuA[,znH{mL|BcIzAv@JrHeFg@,pv@alWaByMdE`McBV,rqDeeBcB}AjCqBt@wEuB}GaV?zEkD~DYSoCcHsInAsDc@cH}JaHiHmM^_JfLsCdHPU~ChEfAlBwBmBuHpK|BbXzWjFfNQ`SzDrNcCpIqHxA}Dy@gRtJ,~sDctDUtDlEtEdC}EaGqF{@bA,~sDctDz@cA`GpFeC|EmEuETuD,ijE`{Ue@aNtGcVsAe[nNaOz@eD}C}BCcD~LkLhFcBbBwJlTpCpUiKhCeHsC{QoA_CwIaBkBeShCg@nFxCtGj@m@`CxBfAJlLpB??xAjFeE?`GpH~AwGhIs@`DlBtJoOjj@kIlK_Bn@eE{AmGvCqPdSkDDoCzEkCp@{E|HyLvD}BdIpA^tFu@zTaRvM_EzDyFjBvA_KpM}FVuIfPCaBeDqAeEnGqQ`I,z{DbgJU_CbK}RfCsBlIvBlB~EQ`G}DxLaVaD,`rEplIqBv@}AwAgCrBcK|RT~BsSyW_DCqBbBd@bBwIcAK|E_InAu@jL}Jl@qKeCsDzCaEGG~JoNbAgGzVqDvEiJK`@dGvEbI?fMoHMtBbDEpDuBnEuAk@mHbEqDmDmGm@mEaLHuD{R}AkIvBKyCmAESrB}BBDeKeAaAtD_BbAmHyGsL{@rDcGRs@xAx@yIyCgLcCo@d@uCtAXzBqBnFtA~G{D}BqIXkGiCElA}Q_LcIjMaD^kBhCCdDtCz@}@\\aJhEGcCwC`EeQtBaBlB^}@gF`BoTdKgP`AcItLmDjInAjXbU`]vBlXnIlEnEjArOrHvQdEfDlPnAz^~Z,lcApqLJ{FwEcIa@eGhJJpDwEfG{VnNcAF_K`EFrD{CfJdAh@~@cDzDt@vOjOrDs@bG`DlAoCrBq@dGtDfDXnCsNxDaE_AkJdFwE}BuHjA}MeCaIjD,zYxsLItDlE`LlGl@pDlDlHcEtAj@tBoEDqDuBcDnHLKkE`IkD|MdCtHkApJxGcVfb@sm@lVqEhHyA_A}D~AkG}ElEZBcDdBqAqAqBuH_DmAoFqE{EkHuA`MwKIcMzAwCjE~BnB_D,yF~`L}CbCdA`AEdK|BCRsBlADJxCjIwBzR|AoB~CkE_C{AvCHbMaMvKyAlMcGxHoLsJo@hA}Ic@sGnBoC_CsBl@wDgJkFe@{AqB]kHeFqKvBM`@~BfFzDbGnALgBjIcAtAaBDuJjDkC?yK~H~AjFgBbBdBxHyD,eu@lbNpCUnC~BeDlBu@q@gCzDjCzFtCiA`AnDwB`@TzAoAf@F`FyGNhCiHwCcNnDmI,yz@|bOPjAzFDuJrKhBXiAlBaEv@_AkAv@{JpG}E,kcAziO]xKkJfKeA{DaBDQ_E}DoDi@aJjXdB,w|AtfOh@`JhJ~MuDjBiBhHaCg@}CyF[gQfEmJ,cyAlmP~BeI|Bb@uBvLgCuC,{yAl_QqH_B?aGkFdE?yAqB?@sJ~JP^iEdG`FfCtC_DhL,inBblPgCaCZkAjJn@~BrB?z@_KQ,o_@pzJbCn@xCfLy@xIr@yAbGSz@sDxGrLLzCcLfHcBeBkFfB_I_B?xKkDjCEtJuA`BkIbAMfBcGoAgF{Da@_CfAzB`E_AtBvA|CiAMwAmJZqAwF{Ck@~H}IQgKpBkGoBqBOgNz@hDnE{J~C_@h@uDtB|CrCq@bAjDrCp@vCgC,{Jj`JI~CfCnFgB|EaE~@oFuA{BpBuAY}D|GsCq@cAkDsCp@uB}C~MiO|JrDnLmH,mMvsIg@`HhCDOjB}GrEqCxA}JsDh@}RjDfB~F}AdGdB,_YzaIvK~Fe@zHeGeB_G|AkDgBdAwExFsF,ctHue@vA}JvG|BNpC`DjCzAB_@_BvAcAbCs@z@dAzCs@VkBvATnBtDu@hK`AbHvBTXfFwEhVwBgBmKe@wH`JkApHqCRFqQcF~@tA}D{CqMcD{@g@mDvFcJxA{J,miGuu@kA_CdI^g@xAqED,\\`vMxG`@pEzElAnFtH~CpApBeBpACbDaJeCwAj@|AjAwAvBmFGmJgDyBuFdE_HEaFpBwD,wrBf}Kx@iCv@~HqBQ?cD,qrBxcNvBqGd@fEiBbFs@yC,}oCdaOfCoWbJwOxAiHrAjUmBeCaApEkDrB}CpTq@kArCzRqDmFoAmH,`jC}aEwCxReEx@qFxHuHrDf@eJ{J{JiBgGhAMCeDhDoInUd@bKdH,`iC}vDhHlM|J`Hb@bHoArDbHrIRnC_EX{EjDgQ?GcEgUEkAiMpAkAkBoItHsDpFyHdEy@vByG,xyCk{B`V?tB|Gu@vEkCpBbB|AiHbFc^|DgXjNyCLaAyIxAwBUgY~AkCZcN}BsOv@oEjCjHqAjAjAhMfUDFbEfQ?,_tAlgBaFtDyIkH[sHnBcFzG}FrLcCHh_@wC^gAwQiAvFv@dI,wlA|fAsLbCyCcBUie@kCk@wu@`FAqH~_@mq@|BAS}ElM?~F|BvBl\\|GvKLrD~IpFjGd@t@~BsA\\|@lJcLzE|AlEo@bGgAH,gbCriBaAi@?oWgKIO{D_ODHoSoH?dNqV@pHvu@aFjCj@The@xCbB{G|FoBbFzAvJuWc@uDzC,cf@yOVbDuQf@kGrDwEgCiCwGrBwCxDe@zLvE`MD,{mCy{AtHq@vD_DnV`C|D~FdGtAjEsAB_ChDrA_FzEnBzCeAdGnBhKeBrFl@bEwCrGbAhGtJbBsBvCz@jCiCEk@fF_L~B_CkS_G}BmM?wAyGeWof@bEkLiAmC,cf@yOaMEuHeEqNDoFiCWuEvCsGm@cEdBsFoBiKdAeGoB{ClHkH|^tPbAhCoAzDvBpDlIpCdBfOqKxH@fI,koAsyA~PaEGbG|Ah@tCkE|E{AbHrDjHJvIsG~FOcB~HIh\\}C[}GbGcEu@wHoGnA{DcAiC{VkJyCiDgB_@mAnAkA_A,wcAsDhBXjGsDtQg@h@`DcE`BoSf@gBrAy@}D,{cAC|OiCvGZbEaBrFzQy@rDyFlAiKiCcPjAKoQ,y~@dq@}@mJrA]u@_CvCwEEkHzGu@hKhCxFmAa@dJ`DbRmG[wClEqJ{@s@}AqF~AsAw@,umArtA\\uLfAIn@cG}AmEbL{ErAv@pF_Br@|A|BCjAxDuFjBd@vCsIxBh@dGzDbDkLvJyCuG{CG,mlAfgBg@sQzCFxCtGmGtH,ao@vs@rF^vCmElGZ}AbGgKdNcIqFY_BtFkBkAyC,sv@xqA{DcDi@eGfIqDbIpFiElH{Ez@,y_Ax`@kGe@oH{D}@iF}GwKFaH~K_Cj@gFdEn@~BnEF~VfGUDjHwCvE,u_@ajDVnQnAxHfCvAgEhQdDxDjCPm@fGbH~EkNpHoCBiKcD}AyOsC{DeARcBuLyEoCqBeFpEgCbFP~EkIfOaM,{TirBnW`DfGtFfJnA|G|G{AtAhApDwA~BvBlCsEbDmByCcCjAkAiEwAQfByGcFwAqGtBgFwAUfE_Ef@jB{PoKmFl@gG,cMoeAKmIhEaATgEfFvApGuBbFvAgBxGvAPjAhEbCkAlBxC}PhMgLiCIeJoF?,gMi{@BeInF?HdJ}F_@,bs@c_EjGqNfPO|FzBr@iBdD~QlCQhBfGzJzJuBxM`@dH_HfG{RG@aLkKThDoJa@yGfIcJ@wCwENmAxFmOOuCmBM{I,tx@wkEd@cErCkBjTw@lEaF`GOrDrC{B`CyHOsD`J}F{B}Jc@cGpC,~fA_wEHeQyFyPhZ{AtKhGlDvKtLjOnCP|HkDtKRvFhNhAvAhEs@AvCwMZgLrCcKeHoUe@iDnIBdDwE^eD_R~BwFxHNzBaCsDsCaGNmE`F{K?,`fDmgEnB|CmBvBiEgAT_DpDm@,z\\epAhE`DuCt@wBmCbAiA,be@_lAk@aXtLcFOuHeDoAk@eCdAgItVuAi@cGhAoBlI?A`LzRF~GgGpAlJ[bN_BjCTfYyAvB`AxIyPyAuRwHo_@zG,`Nm}D|Dw@bFxGkI|@uA_H,mkEg~Eb@jBbCf@fBH[}AlAC~HbBwI`CsJeDg@oCpBR,_oE{~Ed@hCwHmDJyAlA_@vD|C,|lAstHfSgDx@b@uBbAz@d@fFUlq@vObCpIyBpGyLhC_HOc@{AwIsBuKdBmFaBwAsJmFwGyD_@VsA{IuDtAcA,ycEg|EZ|AkFq@ZgArDZ,_tAlgBw@eIhAwFfAvQyAY,m|Dgz@eJrAwF`HwCNoByBiMw@oAyEVkCdBDiAiDfCtAzHi@bBbClFkGxCJdEfHfDCl@`B,gjDhu@_HCgFmTsDuHsCG{BsMmAc@wNnEmB_EqDwOcAmj@hMv@nBxBvCOvFaHvOsCdQPrAlAtIeEc@{AxEuFdWnf@jBvN}B@eo@~hA,miEc}E_Ac@nA}EuEgKrFqA`CvLfEgEdG`K{@dFaQ{B,ovCkaIVeNcK{KdAe@zC[@dB|CQf@xA|GfBcBxQwFrA,uyCq|HqCL_CmBrD_AtBj@WrB,kzD{jH|GwAmBpJ_EqCNgC,_hE_tFsFpAoE{LcKw@mEiHj@mKlFaCz@cCtBM~EpC|DiClBuFvCeBpC`@pEqDY|F~DpCOrJqKrPaExO,}lCaxIsF_Ag@yA}CPAeBpEgE|@iGzFwEvJfGd@bC`GXjAxEhC`A?zBxDlDz@nIuM|EgEwQoKeCmCzA,hbBct_@rB}BX`AmCz@,|`Bmq_@oE^|E_CM~A,ekAc`SoFl@gD_Ce@aGjB_JiC{AhAoDbCm@nFVxCnIxBwA`AdPwHvD,exAspSF|LfD~BnFm@wA|I{C]?nD`YnDDaCbJuBpFoIhBbEgBNq@dEyJbKcU_HcK`BaGtDsEmCeMnH{FmDmCuJtD_BHgCdKj@_DkLLwC`DwCdEKlDaDbGhA,wwAc~SiAnDhCzAmAbDcGiAuOdIXpJvBpEeKk@IfCuD~AkEsEt@{BeF\\[gBpImE@wFlDkAzBvDvBmFfP{LtIM,s~BwpRlCtJzFlDdMoHrElC`GuDbKaBfKnE}RFyVlGrFdJaAjFqL[oHdC{D`GaDL^eAoCCo@cBgJ_@l@{C_PkEiCaGb@mCkFg@OsBdDyC|H@fD|DjFT_@qEvDo@d@}BdDx@nBkFy@qC|GlE,q`AakS}A_KyBvAyCoI{PMuTlNwBlF{BwDmDjAAvFqIlEgAmMiBiDnBuGpB\\pA}Ar@iEhDjGfIpErVcSpJyA~IXdRfX_CfAgCw@qBtC,_hGooX~C`EnCE~EpLlBZfDcDjChQwApB_GgCkB`F_CcDyFeJdAkGgB^uAuHoBoArB_C,}jFssWkDqLlJ}ErIhAhCfOsMhA_@sCkDfC,csHmcPkH_[tEm^iCaEuBnAoEmE|CaStCe@rA{Gc@aSdE{H\\uL_FcVfAoM|InFpAs@cAoMjEuIfATB~LrJvWy@|H~BfBnC_BlDzG|F`a@sEtXMb[mHnEsClJ}@xNuAfAiFkA_DhCuDbMkCt@,soDi_RjFf@c@lChC`GzJrBbDvAm@zCfJ^n@bB}HhB~BtAeBlBgHsFy@jNiCPaB|FfCdAhBoCrChDt@{BzNe@d@|JvCItBhBdC~GjN|PzA?bCrJra@|AHfBvCxA`A{@x@tD~DrCyD|Dwb@lLqGtDq`@rD~AnLqFbGgA}AmAx@iDhFeCcC?wLiLlDyAbCqE}ENgFeRoOmC@sBiDcB`DuHjCuAaBRmOgDaEhFuEhG{@dBD[nCzEw@jGyMtGjE|GaS|Dw\\eHKi@yBdEUjAsDWiMyD`AmH}Pp@gDsAmCzB}ArAbA\\wE,whCebQpGz@cL|DEvD~Dl@k@vFqL`Au@zBsCiDiBnCgCeA`B}FhCQx@kNfHrFdBmB_CuA|HiB,qlDc|PxDaAVhMkArDoFkFhBoI,gmDwePdHJ@dD_EpW}G`S{DmAiCoEzL{Y~@kM,y|EoeNfD`ESlOtA`BtHkCbBaDrBhDlCAdRnOOfFpE|ExAcChLmD?vLdCbCs@rCeHtEbAl]gFkAgB_H{BpBoDBwA~DaFrDdBoIqBwViDEoBoBwB{MwBJkDsEcClAD}DgFqCwDdAwAuB{BuStFmEpAiI,ohFw~Kh@uOkGcIl@kBnHaBwC{GhA{JrEjWvDeAfFpCE|DbCmAjDrEvBKvBzMnBnBhDDpBvVeBnIuDuD_CNa@vC}GnAmBsA]tAiKgCp@aJ{Ai@yAoG_De@mBiEz@yC,egF}fLiEoBsCh@o@rCwAs@HgDoF}Cm@kGzAh@r@mBZ`HpBRRkYvDq@XyD~DWOvIvCzGoH`Bm@jBjGbI?nG,egGozLsBoDdAiIuB]i@qBrA}GB{TdB_FfF|KV~F~BjAJ|IzDzESjYqBSI{LoC}FaClOaCgDSz@,cdGcgIkB{HrEsGKeIeB^wDsIhBkGfEaBZ{GlEcBfFeJvDyMxBB{@xClBhE~Cd@nEnMkAjEgDPsHtVLjJvC|H}IFcAzCiCs@IbCiDk@p@{D_AoDiFjEp@~CrCTaC|@,azDqnHqEpDqCa@wCdBmBtF}DhC_FqCuBL{@bCmKnFcHTw@gCfDeCXgCgD_Kx@y@bBbA|AmDrC_AlCgIQuQgFmPdIc[pPtB\\uAlBrA|GoA`@wC~BOtDtD`FsDvA_EnDCzBqBfB~GfFjAcCrXuFtA`B`MaAtFsEhKgMxGa@hFlAhA,mkEg~EiHqDyAxBwCRyGgDRkPeBuPlDrEbKv@dLbYoA|E,iqFuaHgHxPgDN_@uGvAuBp@f@bAiB~@v@vAmDhCE,{nJ}cA{F}FiFaAeB~BiGJ{DaCBeEmAeAeAfAcSaS?_EoBs@^yJcC]GyBhFcQ`KgAx@vIhC`EzB_@jI~TxGpCzFmI`FvDl@nEjO|DSpF|CpBHfF{T|J,a~IcoDzB{OrCVbHaKv@tG`EaBJjDnChAuBt_@`AfJuD`Ag@wBsF~@iA{KqBm@_AcDwARoBqI,sdIueEm@gKnB_CdB`@H_D|BcAbEm\\rI`AdIz\\hBIuBlSkALXvD`GdFAvDe@xA}D}BBiFsInGeAdFpCpO[nLkB|ByBkCyAr@}DwGeFlAaAgJtBu_@oCiAKkD,}oIwqCrF_Af@vBbJeDtFlHxAs@wAhFp@dJcFbMKrGiCfFuJ|D{CIyE{TpAwETeXrAuC,wkHciBnAN@nBlE`Ap@rGgCnNfAzEeAxH_BqAT_RcDHuBoC~@sC_BwDp@wFdC_B,smH_iCjB}BvHpInB~NyEbMkD[AoBoAOfAoDkDkQf@_G,klHkeDq@sDdAeFrIoGChF|D|BgGRyGlH,i{GmoDf@qGjAvCnFv@}AfG`BlIYlOwCl@e@dFoGjGe@_DmGwEuAoEfAyI_B}IxGmHfGS,qzIqdDvAS~@bDpBl@hAzKsAtCiBEaAhHgDj@cAyVvCeI,efJqiDbGqDnBpIwCdIbAxVsGiBcA{DrC_DC_DwCe@c@kDbBgL,wrJ{mDvCnBxD{@~@tA_ArQuBWm@fEsBPy@_\\,_oIgwAzCHtJ}DfDjPnCw@dCwEtBnCbDI]ba@wG}Bc@~GyDzBwIHkAiDcHs@^kEaBgC{Dt@CuG`EkE{A{HlC_I,osGslCrAw@XmOaBmI|AgG`FnDpB_Ab@vJbB@AvRcEpBqDwBuA~AwB_@,s{EicDjAxHgApFuAe@pAeO,kaGmnC@wRcBAt@_BrCjBXrMpBiC[bJtEoCj@jAtCqEpBCu@xDdB{@T|BnDiA@bCuAbDmPnHqFmDcBaK,igFyvGk@lKdCjSSjPfEtB{AhAiAkA]`HrBfCTnHqBxJhBvDiB`EBxEuHfG{C_B}A|B_E}EGsHwCsAX}JyDwMCkIxE{R}BuY`B_EfDOjBaFv@fCbHU~CmB,mdGgbDc@wJlCeEdFlOeCz@sCkBu@~A,g~FkbCpFlD{BrCeKRaBuA|A{C`FOp@sA,saHqfBtBcMdCoBjAjAiA`RpAh@rM{OmEfNyH|E]~BtA|@cAx@gAIHcI}CwAs@_D,_hH_{@rAVh@_EpANjChRaCxC^~A}FoCy@cJ|@wE,ixHwd@dC]MdBwBgA,o|Hoe@|F~AkAtGwFbJ_AkNdCmF,gmIej@xFLjAhDpEa@eClFVjI{IwGmAwL,wdGlw@oAyC`Bq@QkGbBw@t@zAvGj@NtAtH}AvFdDEnEwGK}AhCsKwC_Fr@,{fFpm@cEsAuH|AOuAwGk@u@{AcBv@PjGaBp@nAxCeFfAoCyG`A_e@fD_MTqOrBIbC|Dj@~FrIxEpBmA|KbMAzLpChEeEbF_@xD,uoIve@nCa@pDvCtB`J]zGoEaDkEfByFgLtE?d@qG,vbCck_@vEkGn@jAoC|FyH~G`E}I,n`Agt^dAw@AjCyBjAt@_D,t|@il^OfEmB\\|BeF,bq@wd^fBw@_FtIvB}G,zj@cu]`AoAuCfErAwB,lyFqpa@rFnDnAxCqAtBcDsB}DxGmCuC{GYyP|KrCsIbKiEgCCt@yAvC]nAgHs@wEdHlBCvCvD~@,foGmc`@eRqRfDyAoAmCrAy@rKrH~AiAlAdIlIdDpC`GsApO}EiAuHkO,`~Faz[JwBrMjAu@dAjChCQbDyPdGvAcIaAiG,jhEmsWrC`KxDnBPpVvErJExGeD|HsBCgAcCqEQePvC{SrItAwAyDbAfC}C_KfD}JeAmCqAvCMiCuAaF{KkE}XgHsG{DMiDkCjDsAg@uA}AfAaB_Aj@wAwCWkGeGqAsGpEaGR{FmBh@wJqFuAgKeBBaArC[kB~EkQmAmF`B{A`EdEnIzA|Oo\\cAaCcEoAmGuAmO@{IeDfWwGkA_CbDaDxWkE|GkNdKeDJqErEa@hJgKvPmC`UfCtOvJnRhEjApItFlK{B~GgB]tDzG}CpQwJrEiBbH_BaAsCn@hC`Bb@pDcIsEsCNlKjJqAzCsJzD_FjQnCj_@,_n@e~NnE\\dB`G}L`CcIyAjMgI,wpBgkT}@dDkDBmCoLjAk@jEdC~AjD,ugGstNqBNs@iC{IrD{BqNeJoC`AkKyAoBiEIgDkKjCu@tDcM~CiChFjAtAgA|@yNrCmJlHoELc[rEuXkBiFkAmRsFeOoC~A_CgBx@}HsJwWC_MgAUkEtIbAnMqAr@}IoFjAoF}ByGwA@sGcHoB@m@lBgC{K~BeV|QuI~@{IlCkFzDqAiCeXzS~J`@|KvKUDdBbBAsB~BnBnAtAtHfB_@eAjGxJhOlE`SoH_FiBhBxLtXzHqLmC_FpAsHhB_@v@zGzIdKlBwEtOoIrCBt@zBhDcD~HpAPlBlUlN`JhPnBzIaAbAdFzQrEdAJlB}EDsArPqA|AqB]oBtGhBhDbBtPdF]EhBaCVx@pCoBjFeDy@e@|BwDn@^pEkFUgD}D}HAeDxCMjIsAcA{B|ArAlCq@fDrG|KoAnNfEpF}CNUdQwSfk@{Ev@ZoCeBEiGz@iFtEqAhIoHpF_EVYxDwDp@{D{EK}I_CkAW_GgF}K,mwCcxVbNlE}H~B{IuGz@yAxB`@,adHg`Ak@uIvBkIvDYh@`I`Gs@hL}N?{CrADjFqNlBP}BzG~BrAhAoChBVdEpGqEuAyEjCmMjYwHdEyAdGfC`HwAUWjB{Cr@{@eAcCr@IiLoAi@GkFqAO,kmFg{AQwC`IrAeEtOgB[AuL,s~Fmu@}@cBlCwBfGZt@jDs@jAcJt@HmB,svI_}@BtG{HvAqByA{BwKfD`AtAcCdEzF`Bu@,u}IilAbB_A`DvBoBpEsAZaAeH,uoIve@e@pGuE?GgDxBuEhCjB,wlIhRsB[}BfCyA`HyAgAu@`A|AjB_EJeBbBqJcF?qKvEtEYeLtIfFJmE`GcE^gCpHsDd@qFxD|BfBoAfBrDxBpf@}FyM_@xHoAx@}@qEkBlBcCe@RiH,k~KtyA`Cl@fCaFxCbGjDlV{ArXwAcEaBrLe@aJ{@Fm@bLaCgC]oHfCuHmBoHx@{FkBeILkI,sdGaaHlCwGcCyCtHiJNbDrJhC}AlDcBcAy@x@`DtHiCDwAlD_Aw@mEvDd@qH_DP,cqFk_HYfCgDdCn@}DpCoA,onGuxFzDoa@fGiFPbRyAtK{ER_DjH,knAerVyCdBnAqFjDt@aBtA,k}@e}VsDgAKmBdC^_EsC|DRzFbEiCzBu@i@,qs@{tWrF_@vDbAkEhAbB|ArC_A|Av@sBjFqCv@}A{@}A|BxDnHy@`@iDmAaCkFxAeAuCeIyCJ|AaDnD_@,gy@scV|DfGwQqMbDc@tFlF,{pBs{V`Fa@fFhD~HMlB{LvFYiEdFfAr@uB|BOxGeCgAm@z@fAXiE~BkR}Cx@eI,kfAwyV}A^|@wFbF~EcEG,_kAkoW|Ew@s@xC|Du@l@~AoGbBLuBiA@yCxBnAuF,kg@qpRp@eEfBOiBcEhCcDnY}FJlCqHhLcVbG,{Xw_Va@pK~PxFM~IpCrMqBhCeC`@^mHiDg@oAeI}GqFfByA}@iCaFSeH_GAoAzDoBrBiH|FbG,aa@qpU`FR|@hCgBxAwDwF,uaHiuAcA}MdAiAr@~C|CvAIbIiES,unLuqDlCZbCqHvCxD`FiFjDfCtCsD`CnAfCgHdBjArJdR`Cn_@mDtHcEk@uD~AsB_B_KcWsARmDxIsHDiFbQs@yBhB}Ed@yMkFaHaAuHlA_GjCrA,yqH_lCxChC{@tEjDjQmCbEkEoIBaRjA}D,m~H{|ApDsI[gDjDaGrDxJwArI~AvDeEjJoCv@gDkP,cyAubF{NsAoEwH~KkDbSyV^pCkKnM@nHyAvBtC~@i@fF,{sFwuZhEvDpMd@jCfBhB|QdF|GmAdCuCFlCpXrCiErIdCrA~BmA`BsDq@cEnEiLaSScRaJoE|AeCuGwKsQoDc@sEvLeB,wqGyf[sAmC~Ek@t@fHfEnDiCxHxEjBB|EeEZyCaBKuEoLuBnEiFlBeH,cpEizXsDsHlBkDxBpBQvDtBr@y@bC}AA,b}BpjJ|Jm@t@kL~HoAJ}EfObBxCrDu@hQoHeEwA\\_GdReInJkOsDu@wObD{D,wuB_dItM}Et@nCzCj@~HxTlC`RtB~BJlHaOnDyM{Cz@aT`Aq@mIgLkA_Q,ovDmyE^_F_D}GeBcBgEfEaCwL`EyOpKsPb@eP|Aq@CmCjDmAfEkGvEQbEeFdIyBx@aSlC{AnKdCfEvQjA~PlIfLaAp@{@`TtFvBsRnJgJfJ_N`CwBfEqVvM?bBcG_A,xfNboHk@oK`CcPtHuBfEtk@oA~UqAa@yBwQwHqM,rtNh}KXqZwC}FpAoE~DtBO`ZcCfJ,l|L|lMOoJoIaA}BiHxN_KvCxA`AjMCdGmAaBv@hM{@vCqAJmA{E,h`Mp~RJsa@pBuBCr[yBtH,jkMj}VcAi@^aVxBlHuA|M,bjMnzWi@oCzByNqAhS,fjNd~^kAwB^uJ~EuKX~JmEbO,lpO~cb@qB{D|@gJaA}GpAaHaCuZhCiQ~C}v@u@_QdBsh@qB{`@}Ak@u@xk@yB`UwFyDqAf@{DzWn@ue@gEmYqAdAqBfP{@fc@mE~OcF|@pAuGm@eStAcDS}HwDs_@uCjAeAy@c@aGbAuBwF{w@b@_`BwC_c@dEgIy@oEvCcVm@yOdAmYuAgBiC`FMbGiH`Fx@k[lCoP{@af@wCkDvDgXhAgVoCiFfDoX_Eol@_EgJqMvGkF}DqF\\yAaB_MqYqGm_@r@uBfDlJKvH`BxGfC|BlCiB|@bI`H`K~FmNhHuGhN_FhBZvH~TrG`f@Lnh@nFmU|AtY~CTvEuOfL}`BfDeHiH{s@dAmj@oCwKkEkkAwE`Ff@fd@_FZmIcj@oBcg@cE{]}BkJmAy@o@pEoCiEuCwRcFoKvA}PyCmBhByNm@_VpAuA}Iyp@VcJbDcGkDgOtAuIeByXb@uL|B_Fo@g[_Ds]gFwJ~F{\\kFuSoDga@eHeZuAeP^kJdG{MbCyOkBkOfBg]bG{CxAVzBzInA[C}EhF|EpA_Ka@eFyLwPsAsVaFeH_F}UKyW{DwFzDoIn@ee@[sWqImRrG}So@iXcDaTbDoKpBmY}CeTv@{a@mBgd@sD}@dHuHb@gDIeq@bEgFbBuL~A{U}@cJbDyNj@yMbE}Mp@{b@lDkWfK~JnC~RrJvNdDN|EyFZsJtAoApAt_@dJjK~GoW|Dk_@`BgBnDeaA?~heA,szEqkEiBqJxBvBOxF,szEqkE^}FpAjEiBnCG}A,yzEpLvNoElAb@zBrMrCFrDtHfFlTvIVn@fOdL|EvEtGtLjDNdMe]cOeJkJUyDcJiLyFr@{KgFmD}IiIcEtBoV,ohCmeF?diAgq@z@qH}AjCkViC}K|BcEaAm@F_LvIaCnIvCwBjEkGbDlc@aTdD^zEkG,ohCg{CnK??dFrA@}Vzp@vDvIcEjLyEtFb@zAuIdEsAmAiN]mGjAm@aBgDBeEgHyCKlDmVpD}A|EcToC_EwCl@_EmELwKxAeAx@oIz|@O,_q@uiHvQtPFbGnEfJcAxEfDpFmEfTkL`H_FbFMzBwBmDaMwAeKaIoJoBh@gFuC_AxAwBAoHtEyHtDuCtDhCrBSVkEfAj@tG_FjFuX,kmAugG\\aE`CvBv@sAhBfAWjEsBRuDiC,ifA}pHfK@`HdFkFtXuG~EqDsBhEcE_Ee],|D{rElA~YcKy@_IcG[nAiFKu@sAAkL{AyBjC_BfIoBfJdFrEA,bFc}DdFcAlBxIsFs@_BaF,qiG_sBuGbL{ClCqAi@hAiT`GOvDpD,ogG{jCbEqBbB`Kq@rA_E_@u@cI,}}GutBk@uGnGkGd@eFpBz@~CqBtCtAh@`EuAe@uB~DzAlBmCnEgBkAkA~AcDu@eCnB,eiGm|BS`A`DhAwBvDoEyCzB_F|@t@,sdGu_CqCfB}BoBjBcFbDjF,gbAn`KQ{CrCFBhEeCu@,}Tu_EyE|Ed@zIkTzP}CtF{@aCmGiB[oCzD_EL{LqDmE~AmG}FqEqD`Ai@cFbH?lAeBfIs@tDlElBaFvIsFvI|Jv@~N";
+
+/* ============================================================
+   INFO PANEL + CITY BUTTONS  (work with or without WebGL)
+   ============================================================ */
+var infoEl=document.getElementById('globe-info'),
+    elCity=document.getElementById('gi-city'),
+    elWhen=document.getElementById('gi-when'),
+    elTitle=document.getElementById('gi-title'),
+    elBody=document.getElementById('gi-body'),
+    cityRow=document.getElementById('city-row'),
+    holder=document.getElementById('globe-holder');
+var buttons={},pins={};
+
+function selectCity(key,spin){
+  var c=null;
+  for(var i=0;i<CITIES.length;i++) if(CITIES[i].key===key) c=CITIES[i];
+  if(!c) return;
+  infoEl.classList.remove('show');
+  setTimeout(function(){
+    elCity.innerHTML=c.city; elWhen.innerHTML=c.when;
+    elTitle.innerHTML=c.title; elBody.innerHTML=c.body;
+    infoEl.classList.add('show');
+  },150);
+  for(var k in buttons) buttons[k].classList.toggle('active',k===key);
+  for(var p in pins) pins[p].el.classList.toggle('active',p===key);
+  if(spin&&window.__globeFocus) window.__globeFocus(c);
+}
+
+CITIES.forEach(function(c){
+  var b=document.createElement('button');
+  b.className='city-btn'; b.type='button'; b.textContent=c.label;
+  b.setAttribute('aria-label','Show '+c.label);
+  b.onclick=function(){ selectCity(c.key,true); };
+  cityRow.appendChild(b); buttons[c.key]=b;
+});
+
+/* ============================================================
+   GLOBE
+   ============================================================ */
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(typeof THREE==='undefined'){ document.body.classList.add('no-webgl'); selectCity('dublin',false); return; }
+  var renderer;
+  try{ renderer=new THREE.WebGLRenderer({alpha:true,antialias:true}); }
+  catch(e){ document.body.classList.add('no-webgl'); selectCity('dublin',false); return; }
+
+  /* green land, blue ocean, country borders — tuned to the warm palette */
+  var PALETTE={
+    light:{ ocean:'#2b7fb0', land:'#10b981', border:'rgba(255,255,255,0.92)',
+            grid:'rgba(255,255,255,0.16)', arc:'#ffffff', arcOp:0.40 },
+    dark: { ocean:'#0d3b52', land:'#1d9e70', border:'rgba(210,255,236,0.55)',
+            grid:'rgba(255,255,255,0.09)', arc:'#a7f3d0', arcOp:0.26 }
+  };
+
+  var size=holder.clientWidth||400;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setSize(size,size,false);
+  holder.appendChild(renderer.domElement);
+
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(34,1,0.1,100);
+  camera.position.set(0,0,3.35);
+  var globe=new THREE.Group(); scene.add(globe);
+  var R=1;
+
+  /* lat/lon -> xyz. East to the right, Greenwich facing camera at rotation 0. */
+  function toXYZ(lat,lon,r){
+    var la=lat*Math.PI/180, lo=lon*Math.PI/180;
+    return new THREE.Vector3(
+      r*Math.cos(la)*Math.sin(lo),
+      r*Math.sin(la),
+      r*Math.cos(la)*Math.cos(lo)
+    );
+  }
+
+  /* ---------- decode country outlines (polyline encoding, 0.01°) ---------- */
+  function decodeRing(s){
+    var pts=[],i=0,lat=0,lon=0,b,shift,result;
+    while(i<s.length){
+      shift=0;result=0;
+      do{ b=s.charCodeAt(i++)-63; result|=(b&0x1f)<<shift; shift+=5; }while(b>=0x20);
+      lat+=(result&1)?~(result>>1):(result>>1);
+      shift=0;result=0;
+      do{ b=s.charCodeAt(i++)-63; result|=(b&0x1f)<<shift; shift+=5; }while(b>=0x20);
+      lon+=(result&1)?~(result>>1):(result>>1);
+      pts.push([lon/100,lat/100]);
+    }
+    return pts;
+  }
+  /* unwrap longitudes so shapes crossing the antimeridian don't streak */
+  var RINGS=COUNTRIES_ENC.split(',').map(function(s){
+    var r=decodeRing(s),out=[r[0]],prev=r[0][0],k,lon;
+    for(k=1;k<r.length;k++){
+      lon=r[k][0];
+      while(lon-prev>180) lon-=360;
+      while(lon-prev<-180) lon+=360;
+      out.push([lon,r[k][1]]); prev=lon;
+    }
+    return out;
+  });
+
+  /* ---------- paint the world map onto a canvas ---------- */
+  var TW=2048,TH=1024;
+  var mapCanvas=document.createElement('canvas');
+  mapCanvas.width=TW; mapCanvas.height=TH;
+  var mctx=mapCanvas.getContext('2d');
+  var OFFS=[-360,0,360];   /* draw three times so the seam wraps cleanly */
+
+  function tracePath(r,off){
+    mctx.beginPath();
+    for(var j=0;j<r.length;j++){
+      var x=(r[j][0]+off+180)/360*TW, y=(90-r[j][1])/180*TH;
+      if(j===0) mctx.moveTo(x,y); else mctx.lineTo(x,y);
+    }
+    mctx.closePath();
+  }
+
+  function drawMap(p){
+    mctx.fillStyle=p.ocean; mctx.fillRect(0,0,TW,TH);
+    var k,i;
+    mctx.fillStyle=p.land;
+    for(k=0;k<OFFS.length;k++) for(i=0;i<RINGS.length;i++){ tracePath(RINGS[i],OFFS[k]); mctx.fill(); }
+    mctx.strokeStyle=p.border; mctx.lineWidth=2; mctx.lineJoin='round';
+    for(k=0;k<OFFS.length;k++) for(i=0;i<RINGS.length;i++){ tracePath(RINGS[i],OFFS[k]); mctx.stroke(); }
+    mctx.strokeStyle=p.grid; mctx.lineWidth=1;
+    for(var g=-60;g<=60;g+=30){
+      var y=(90-g)/180*TH;
+      mctx.beginPath(); mctx.moveTo(0,y); mctx.lineTo(TW,y); mctx.stroke();
+    }
+    for(var m=-180;m<180;m+=30){
+      var x=(m+180)/360*TW;
+      mctx.beginPath(); mctx.moveTo(x,0); mctx.lineTo(x,TH); mctx.stroke();
+    }
+  }
+
+  /* ---------- sphere with explicit UVs, so the map lines up with the pins ---------- */
+  function buildSphere(radius,segX,segY){
+    var pos=[],uv=[],idx=[],x,y;
+    for(y=0;y<=segY;y++){
+      var lat=90-180*y/segY;
+      for(x=0;x<=segX;x++){
+        var lon=-180+360*x/segX;
+        var v=toXYZ(lat,lon,radius);
+        pos.push(v.x,v.y,v.z);
+        uv.push((lon+180)/360,(lat+90)/180);
+      }
+    }
+    for(y=0;y<segY;y++) for(x=0;x<segX;x++){
+      var a=y*(segX+1)+x, b=a+segX+1;
+      idx.push(a,b,a+1, b,b+1,a+1);
+    }
+    var g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+    g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+    g.setIndex(idx);
+    return g;
+  }
+
+  var mapTex=new THREE.CanvasTexture(mapCanvas);
+  if(renderer.capabilities&&renderer.capabilities.getMaxAnisotropy){
+    mapTex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  }
+  var earthMat=new THREE.MeshBasicMaterial({map:mapTex,side:THREE.DoubleSide});
+  globe.add(new THREE.Mesh(buildSphere(R*0.995,128,64),earthMat));
+
+  /* great-circle arcs, chronological */
+  var arcMat=new THREE.LineBasicMaterial({
+    color:new THREE.Color(PALETTE.light.arc),transparent:true,opacity:PALETTE.light.arcOp
+  });
+  function arcPoints(a,b,segs){
+    var v1=toXYZ(a.lat,a.lon,1).normalize(), v2=toXYZ(b.lat,b.lon,1).normalize();
+    var omega=Math.acos(Math.max(-1,Math.min(1,v1.dot(v2))));
+    var pts=[];
+    for(var i=0;i<=segs;i++){
+      var t=i/segs,p;
+      if(omega<1e-6){ p=v1.clone(); }
+      else{
+        var s1=Math.sin((1-t)*omega)/Math.sin(omega),
+            s2=Math.sin(t*omega)/Math.sin(omega);
+        p=v1.clone().multiplyScalar(s1).add(v2.clone().multiplyScalar(s2)).normalize();
+      }
+      p.multiplyScalar(R*(1+0.22*Math.sin(Math.PI*t)));
+      pts.push(p);
+    }
+    return pts;
+  }
+  function cityByKey(k){ for(var i=0;i<CITIES.length;i++) if(CITIES[i].key===k) return CITIES[i]; return null; }
+  for(var ai=0;ai<ARC_ORDER.length-1;ai++){
+    var A=cityByKey(ARC_ORDER[ai]),B=cityByKey(ARC_ORDER[ai+1]);
+    if(!A||!B) continue;
+    globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(arcPoints(A,B,96)),arcMat));
+  }
+
+  window.__globeTheme=function(t){
+    var p=PALETTE[t]||PALETTE.light;
+    drawMap(p); mapTex.needsUpdate=true;
+    arcMat.color.set(p.arc); arcMat.opacity=p.arcOp;
+  };
+
+  /* pins */
+  CITIES.forEach(function(c){
+    var anchor=new THREE.Object3D();
+    anchor.position.copy(toXYZ(c.lat,c.lon,R*1.015));
+    globe.add(anchor);
+    var el=document.createElement('button');
+    el.className='pin'; el.type='button';
+    el.setAttribute('aria-label','Show '+c.label);
+    el.innerHTML='<span class="pin-dot"></span><span class="pin-label">'+c.label+'</span>';
+    el.onclick=function(ev){ ev.stopPropagation(); selectCity(c.key,true); };
+    holder.appendChild(el);
+    pins[c.key]={el:el,anchor:anchor,city:c};
+  });
+
+  /* drag to rotate */
+  var rotY=-CITIES[0].lon*Math.PI/180,
+      rotX=CITIES[0].lat*Math.PI/180*0.8,
+      targY=rotY,targX=rotX,
+      dragging=false,lastX=0,lastY=0,idle=0;
+  var cv=renderer.domElement;
+  function down(x,y){ dragging=true; lastX=x; lastY=y; idle=0; cv.classList.add('dragging'); }
+  function move(x,y){
+    if(!dragging) return;
+    targY+=(x-lastX)*0.006;
+    targX+=(y-lastY)*0.005;
+    targX=Math.max(-1.05,Math.min(1.05,targX));
+    lastX=x; lastY=y; idle=0;
+  }
+  function up(){ dragging=false; cv.classList.remove('dragging'); }
+  cv.addEventListener('mousedown',function(e){ down(e.clientX,e.clientY); });
+  window.addEventListener('mousemove',function(e){ move(e.clientX,e.clientY); });
+  window.addEventListener('mouseup',up);
+  cv.addEventListener('touchstart',function(e){ if(e.touches.length===1) down(e.touches[0].clientX,e.touches[0].clientY); },{passive:true});
+  cv.addEventListener('touchmove',function(e){ if(e.touches.length===1) move(e.touches[0].clientX,e.touches[0].clientY); },{passive:true});
+  cv.addEventListener('touchend',up,{passive:true});
+
+  window.__globeFocus=function(c){
+    targY=-c.lon*Math.PI/180;
+    targX=c.lat*Math.PI/180*0.8;
+    idle=-140;
+  };
+
+  function resize(){ var s=holder.clientWidth||400; renderer.setSize(s,s,false); }
+  window.addEventListener('resize',resize);
+
+  var proj=new THREE.Vector3(), camDir=new THREE.Vector3(0,0,1);
+  function frame(){
+    requestAnimationFrame(frame);
+    if(!dragging){ idle++; if(!reduced&&idle>0) targY+=0.0015; }
+    rotY+=(targY-rotY)*0.075;
+    rotX+=(targX-rotX)*0.075;
+    globe.rotation.y=rotY;
+    globe.rotation.x=rotX;
+    var s=holder.clientWidth||400;
+    for(var k in pins){
+      var p=pins[k];
+      p.anchor.getWorldPosition(proj);
+      var front=proj.clone().normalize().dot(camDir)>0.12;
+      proj.project(camera);
+      p.el.style.left=((proj.x*0.5+0.5)*s)+'px';
+      p.el.style.top=((-proj.y*0.5+0.5)*s)+'px';
+      p.el.classList.toggle('vis',front);
+    }
+    renderer.render(scene,camera);
+  }
+  window.__globeTheme(currentTheme());
+  resize(); frame(); selectCity('dublin',false);
+})();
+
+/* ============================================================
+   SCROLL REVEAL + ACTIVE NAV
+   ============================================================ */
+(function(){
+  var items=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<items.length;i++) items[i].classList.add('in');
+  } else {
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    },{threshold:0.10,rootMargin:'0px 0px -40px 0px'});
+    items.forEach(function(el){ obs.observe(el); });
+  }
+
+  var links=document.querySelectorAll('.nav-link');
+  var secs=[];
+  links.forEach(function(l){
+    var id=l.getAttribute('data-section');
+    var s=document.getElementById(id);
+    if(s) secs.push({link:l,sec:s});
+  });
+  function onScroll(){
+    var y=window.scrollY+120, cur=secs[0];
+    for(var i=0;i<secs.length;i++) if(secs[i].sec.offsetTop<=y) cur=secs[i];
+    links.forEach(function(l){ l.classList.remove('active'); });
+    if(cur) cur.link.classList.add('active');
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
